@@ -3,8 +3,8 @@ import yaml
 from notion.client import NotionClient
 from notion.block import *
 
-from time_utils import *
-from schema import *
+from .time_utils import *
+from .schema import *
 
 import warnings 
 warnings.filterwarnings("ignore")
@@ -111,7 +111,11 @@ def make_db(page, client=None, **kwargs):
 # @logging_time
 def write_db(db, data):
 
-    row = db.collection.add_row()
-    for prop, value in data.items():
-
-        row.__setattr__(prop, value)
+    try:
+        row = db.collection.add_row()
+        for prop, value in data.items():
+            row.__setattr__(prop, value)
+    
+    except HTTPError as e:
+        print(e)
+        pass
