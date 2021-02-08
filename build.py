@@ -3,6 +3,8 @@ import yaml
 from notion.client import NotionClient
 from notion.block import *
 
+from urllib.error import HTTPError
+
 from .time_utils import *
 from .schema import *
 
